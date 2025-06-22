@@ -3,7 +3,7 @@
   > Validar dados, transformar dados
 */
 
-import { IsNotEmpty, isNotEmpty, IsString, MinLength } from "class-validator";
+import { IsNotEmpty, isNotEmpty, IsNumber, IsString, MinLength } from "class-validator";
 
 export class CreateTaskDto{
   @IsString()
@@ -14,4 +14,8 @@ export class CreateTaskDto{
   @IsString()
   @IsNotEmpty()
   readonly description: string; 
+
+  @IsNumber()
+  @IsNotEmpty()
+  readonly userId: number
 }

@@ -25,7 +25,10 @@ async listAllTasks(paginationDto?: PaginationDto) {
 
   async findOne(id: number) {
     const task = await this.prisma.task.findUnique({
-      where: { id },
+      where: { 
+        id : id,
+      },
+      
     });
     if (!task) {
       throw new NotFoundException('Essa tarefa não existe');
@@ -40,6 +43,7 @@ async listAllTasks(paginationDto?: PaginationDto) {
           name: createTaskDto.name,
           description: createTaskDto.description,
           completed: false,
+          userId: createTaskDto.userId
         },
       });
     } catch (err) {
@@ -57,7 +61,11 @@ async listAllTasks(paginationDto?: PaginationDto) {
 
     return this.prisma.task.update({
       where: { id },
-      data: updateTaskDto,
+      data: {
+        name: updateTaskDto?.name ? updateTaskDto.name : task.name,
+        description: updateTaskDto?.description ? updateTaskDto.description : task.description,
+        completed: updateTaskDto?.completed ? updateTaskDto.completed : task.completed
+      },
     });
   }
 

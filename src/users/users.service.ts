@@ -16,7 +16,8 @@ export class UsersService {
          select:{ // só vai devolver esses os campos 
           id: true,
           name: true,
-          email: true
+          email: true,
+          Task: true
         }
       })
       if(user) return user;
