@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Delete } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -75,6 +75,30 @@ export class UsersService {
       throw new HttpException('Falha ao atualizar usuário', HttpStatus.BAD_REQUEST)
     }
 
+  }
+  async delete(id: number){
+    try{
+      const user = await this.prisma.user.findFirst({
+        where:{
+          id: id
+        }
+      })
+       if(!user){
+         throw new HttpException('Usuário não existe!', HttpStatus.BAD_REQUEST)
+      }
+      await this.prisma.user.delete({
+        where:{
+          id: user.id
+        }
+      })
+      
+      return{
+        message: 'Usuário deletado com sucesso!'
+      }
+    } catch(err){
+      console.log(err)
+      throw new HttpException('Falha ao deletar usuário', HttpStatus.BAD_REQUEST)
+    }
   }
 
 }

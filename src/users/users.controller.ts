@@ -1,7 +1,7 @@
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-import { Controller, Get, Param, ParseIntPipe, Post, Body, Patch } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Post, Body, Patch, Delete } from '@nestjs/common';
 //Buscar detalhes de um usuario
 //Cadastrar usuário
 //Deletar usuário
@@ -20,6 +20,11 @@ export class UsersController {
   updateUser(@Param('id', ParseIntPipe) id:number, @Body() updateUserDto: UpdateUserDto){
     return this.UsersService.update(id, updateUserDto)
   }
+  @Delete(':id')
+    deleteUser(@Param('id', ParseIntPipe) id: number){
+      return this.UsersService.delete(id)
+    }
+  
   
 
 }
