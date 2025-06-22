@@ -20,4 +20,19 @@ model Task {
   description String
   completed   Boolean
   createdAt   DateTime @default(now())
+  //relação da task com usuário - ondelete = se usuário for deletado as taks do usuario tb serão
+  userId Int?
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  name String
+  passwordHash String
+  email String @unique
+  createdAt DateTime @default(now())
+  // relação 1 para n
+  Task Task[]
+
 }
