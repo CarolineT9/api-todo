@@ -15,7 +15,7 @@ lerna-debug.log*
 # OS
 .DS_Store
 
-
+#ignora arquivos de banco de dados
 *.db
 # Tests
 /coverage
