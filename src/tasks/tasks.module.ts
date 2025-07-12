@@ -12,7 +12,12 @@ import { ApiExceptionFilter } from 'src/common/filters/exception.filter'; // Cer
     {
       provide: APP_FILTER,
       useClass: ApiExceptionFilter, // Certifique-se de que ApiExceptionFilter está importado corretamente
+    },
+    {
+      provide:  "KEY_TOKEN",
+      useValue: "token_12456"
     }
+    
 
   ],
 })

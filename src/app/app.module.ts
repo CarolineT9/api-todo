@@ -1,12 +1,14 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {  MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TasksModule } from 'src/tasks/tasks.module';
 import { UsersModule } from 'src/users/users.module';
 import { LoggerMiddleware } from 'src/common/middlewares/logger.middleware';
+import { ConfigModule } from '@nestjs/config';
+
 // import { AdminGuard } from 'src/common/guards/admin.guards'; // Import the AdminGuard
 @Module({
-  imports: [TasksModule, UsersModule],
+  imports: [TasksModule, UsersModule, ConfigModule.forRoot(), ],
   controllers: [AppController],
   providers: [
     AppService,
