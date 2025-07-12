@@ -4,10 +4,18 @@ import { AppService } from './app.service';
 import { TasksModule } from 'src/tasks/tasks.module';
 import { UsersModule } from 'src/users/users.module';
 import { LoggerMiddleware } from 'src/common/middlewares/logger.middleware';
+// import { AdminGuard } from 'src/common/guards/admin.guards'; // Import the AdminGuard
 @Module({
   imports: [TasksModule, UsersModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // {
+    //   provide: 'APP_GUARD',
+    //   useClass: AdminGuard, // Register the AdminGuard as a global guard
+    // }
+  
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

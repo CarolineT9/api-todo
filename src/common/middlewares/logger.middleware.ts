@@ -10,7 +10,8 @@ export class LoggerMiddleware implements NestMiddleware {
 
     if (authorization) {
       req['user'] = {
-        token: authorization,
+        token: authorization, //usuario manda um token
+        role: 'admin' // devolve uma role pra saber se eh admin
        // This should be replaced with actual user name extraction logic
         // This should be replaced with actual user ID extraction logic
     } 
